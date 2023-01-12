@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">SnakeGame</string>
+    <string name="scoreTV">0</string>
+    <string name="newGameBTN">Start new game</string>
+    <string name="bestTV">"Best player is: "</string>
+    <string name="bestBTN">See best player</string>
+</resources>

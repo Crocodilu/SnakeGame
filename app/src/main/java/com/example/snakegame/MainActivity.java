@@ -31,7 +31,11 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     // list of snake points / snake length
     private final List<SnakePoints> snakePointsList = new ArrayList<>();
 
+    // type of View to display images, videos, or other content
+    // is implemented as a separate window which sits on top of the main layout window
+    // is used to draw graphics and animations
     private SurfaceView surfaceView;
+
     private TextView scoreTV;
 
     // surface holder to draw snake on surface's canvas
@@ -136,12 +140,13 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 }
             }
         });
-    }
+    }// onCreate
 
     @Override
     public void surfaceCreated(@NonNull SurfaceHolder surfaceHolder) {
 
-        // when surface is created then get surfaceHolder from it and assign to surfaceHolder
+        // when surface is created
+        // then get surfaceHolder from it and assign to surfaceHolder
         this.surfaceHolder = surfaceHolder;
 
         // init data for snake / surfaceView
@@ -192,7 +197,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         // start moving snake / start game
         moveSnake();
-    }
+    }// init
 
     private void addPoint(){
 
@@ -200,6 +205,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         int surfaceWidth = surfaceView.getWidth() - (pointSize * 2);
         int surfaceHeight = surfaceView.getHeight() - (pointSize * 2);
 
+        // generate two random positions for the next point
         int randomXPosition = new Random().nextInt(surfaceWidth / pointSize);
         int randomYPosition = new Random().nextInt(surfaceHeight / pointSize);
 
@@ -214,11 +220,16 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         positionX = (pointSize * randomXPosition) + pointSize;
         positionY = (pointSize * randomYPosition) + pointSize;
-    }
+    }// addPoint
 
     private void moveSnake(){
 
+        // Timer class is a utility class in Java that can be used to schedule tasks to run at a
+        // specific time or to run repeatedly at a set interval
         timer = new Timer();
+
+        // scheduleAtFixedRate method is called on the timer object,
+        // which is used to schedule task to run at a fixed rate
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -354,7 +365,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 }
             }
         }, 1000 - snakeMovingSpeed, 1000 - snakeMovingSpeed);
-    }
+    }// moveSnake
 
     private void growSnake(){
 
@@ -374,7 +385,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 scoreTV.setText(String.valueOf(score));
             }
         });
-    }
+    }// growSnake
 
     private boolean checkGameOver(int headPositionX, int headPositionY){
         boolean gameOver = false;
@@ -401,7 +412,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             }
         }
         return gameOver;
-    }
+    }// checkGameOver
 
     private Paint createPointColor(){
 
@@ -414,5 +425,5 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         }
 
         return pointColor;
-    }
+    }// createPointColor
 }

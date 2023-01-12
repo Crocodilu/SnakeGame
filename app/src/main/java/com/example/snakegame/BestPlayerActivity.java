@@ -21,15 +21,17 @@ import java.time.format.DateTimeFormatter;
 
 public class BestPlayerActivity extends AppCompatActivity {
 
-    private TextView dateTimeTV;
+    TextView dateTimeTV;
 
-    private ImageView trophyIV;
+    ImageView trophyIV;
 
     DataBaseHelper dataBaseHelper;
 
     ArrayAdapter playerArrayAdapter;
 
     ListView bestListView;
+
+    Button newGame1Btn;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -63,7 +65,7 @@ public class BestPlayerActivity extends AppCompatActivity {
                 Intent gitHub = new Intent();
                 gitHub.setAction(Intent.ACTION_VIEW);
                 gitHub.addCategory(Intent.CATEGORY_BROWSABLE);
-                gitHub.setData(Uri.parse("https://github.com/Crocodilu/CalculMobil_Laboratoare"));
+                gitHub.setData(Uri.parse("https://github.com/Crocodilu/SnakeGame"));
                 startActivity(gitHub);
 
                 /*
@@ -74,7 +76,7 @@ public class BestPlayerActivity extends AppCompatActivity {
             }
         });
 
-        final Button newGame1Btn = findViewById(R.id.newGame1Btn);
+        newGame1Btn = findViewById(R.id.newGame1Btn);
         newGame1Btn.setBackgroundColor(Color.CYAN);
         newGame1Btn.setTextColor(Color.BLACK);
 

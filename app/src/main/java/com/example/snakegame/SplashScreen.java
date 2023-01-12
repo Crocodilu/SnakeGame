@@ -13,13 +13,17 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
+        // hide action bar
         getSupportActionBar().hide();
 
+        // creates a new instance of the Handler class and then uses the postDelayed method
+        // to schedule the execution of a Runnable after a delay of 2500 milliseconds (2.5 seconds)
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 Intent startGame = new Intent(SplashScreen.this, MainActivity.class);
                 startActivity(startGame);
+                // finish SplashScreen activity
                 finish();
             }
         }, 2500);

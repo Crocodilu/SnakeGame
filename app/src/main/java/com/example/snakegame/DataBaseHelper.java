@@ -117,6 +117,5 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return returnList;  //returneaza lista creata in bucla do-while
-    }//getEveryone
-
+    }//getBest
 }

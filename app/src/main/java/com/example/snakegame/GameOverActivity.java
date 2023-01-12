@@ -10,17 +10,20 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class GameOverActivity extends AppCompatActivity {
 
-    private TextView scoreInfoTV;
+    TextView scoreInfoTV;
 
+    // used to perform operations such as inserting, updating, and retrieving data from a database
     DataBaseHelper dataBaseHelper;
 
+    // used to adapt arrays to ListViews
     ArrayAdapter playerArrayAdapter;
 
     ListView mainListView;
+
+    Button bestBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,29 +38,31 @@ public class GameOverActivity extends AppCompatActivity {
 
         mainListView = findViewById(R.id.mainListView);
 
-        // adaugam player actual si afisam lista
-        PlayerModel playerModel = null;
+        if(getIntent().getIntExtra("score", 0 ) > 0) {
 
-        try{
-            playerModel = new PlayerModel(-1, getIntent().getIntExtra("score", 0 ));
+            // add the current player and display the list
+            PlayerModel playerModel = null;
+
+            try {
+                playerModel = new PlayerModel(-1, getIntent().getIntExtra("score", 0));
+            } catch (Exception exception) {
+                playerModel = new PlayerModel(-1, 0);
+            }
+
+            DataBaseHelper dataBaseHelper = new DataBaseHelper(GameOverActivity.this);
+            boolean actionSuccess = dataBaseHelper.addOne(playerModel);
         }
-        catch(Exception exception){
-            playerModel = new PlayerModel(-1,0);
-        }
 
-        DataBaseHelper dataBaseHelper = new DataBaseHelper(GameOverActivity.this);
-        boolean actionSuccess = dataBaseHelper.addOne(playerModel);
-
-        //actualizare continut din lista
+        // update list content
         dataBaseHelper = new DataBaseHelper(GameOverActivity.this);
         playerArrayAdapter = new ArrayAdapter<PlayerModel>(GameOverActivity.this, android.R.layout.simple_list_item_1,dataBaseHelper.getEveryone());
         mainListView.setAdapter(playerArrayAdapter);
 
-        final Button rankBtn = findViewById(R.id.rankBtn);
-        rankBtn.setBackgroundColor(Color.YELLOW);
-        rankBtn.setTextColor(Color.BLACK);
+        bestBtn = findViewById(R.id.bestBtn);
+        bestBtn.setBackgroundColor(Color.YELLOW);
+        bestBtn.setTextColor(Color.BLACK);
 
-        rankBtn.setOnClickListener(new View.OnClickListener() {
+        bestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 

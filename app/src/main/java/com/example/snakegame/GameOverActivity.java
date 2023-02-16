@@ -11,6 +11,12 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.Socket;
+
 public class GameOverActivity extends AppCompatActivity {
 
     TextView scoreInfoTV;
@@ -24,6 +30,7 @@ public class GameOverActivity extends AppCompatActivity {
     ListView mainListView;
 
     Button bestBtn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

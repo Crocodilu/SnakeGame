@@ -4,4 +4,13 @@
     <string name="newGameBTN">Start new game</string>
     <string name="bestTV">"Best player is: "</string>
     <string name="bestBTN">See best player</string>
+    <string name="gitBTN">Git project</string>
+    <string name="trophyBTN">Trophy</string>
+    <string name="exitBTN">Exit app</string>
+    <string name="exitBTN1">Yes</string>
+    <string name="exitTV">"Are you sure you want to leave the application?"</string>
+    <string name="dateInfoTV">"NIST server date: "</string>
+    <string name="timeInfoTV">"System time: "</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -12,14 +12,9 @@ public class PlayerModel {
         this.username = username;
     }
 
-//        public PlayerModel(int id, int score) {
-//        this.id = id;
-//        this.score = score;
-//    }
-
     @Override
     public String toString() {
-        return  "player = " + username +
+        return  "player: " + username +
                 ", score = " + score;
     }
 

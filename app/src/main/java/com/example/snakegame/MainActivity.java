@@ -77,13 +77,14 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // hide action bar
+        getSupportActionBar().hide();
+
         if(getIntent().getBooleanExtra("kill", false)){
             // remove all the activities that share the same affinity
             // in this case i haven’t defined one so it’s the same for all
             finishAffinity();
         }
-
-        getSupportActionBar().setTitle("Snake Game");
 
         // getting surfaceView and scoreTextView from xml file
         surfaceView = findViewById(R.id.surfaceView);

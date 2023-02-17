@@ -296,6 +296,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                     Intent gameOver = new Intent(MainActivity.this, GameOverActivity.class);
                     gameOver.putExtra("score", score);
+                    gameOver.putExtra("username", getIntent().getStringExtra("username"));
 
                     // show game over dialog
                     AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);

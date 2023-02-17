@@ -61,7 +61,7 @@ public class BestPlayerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_best_player);
 
-        getSupportActionBar().setTitle("Snake Game Best Player");
+        getSupportActionBar().setTitle("Snake Game - Best Player");
 
         bestListView = findViewById(R.id.bestListView);
         timeTV = findViewById(R.id.timeTV);

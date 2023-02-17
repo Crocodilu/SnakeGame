@@ -37,7 +37,7 @@ public class GameOverActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_over);
 
-        getSupportActionBar().setTitle("Snake Game Information");
+        getSupportActionBar().setTitle("Snake Game - Information");
 
         scoreInfoTV = findViewById(R.id.scoreInfoTV);
 
@@ -45,15 +45,22 @@ public class GameOverActivity extends AppCompatActivity {
 
         mainListView = findViewById(R.id.mainListView);
 
-        if(getIntent().getIntExtra("score", 0 ) > 0) {
+        int score = getIntent().getIntExtra("score", 0 );
+        String username = getIntent().getStringExtra("username");
+        if(username.equals("")){
+            username = "anonymous";
+        }
+
+        if(score > 0) {
 
             // add the current player and display the list
             PlayerModel playerModel = null;
 
+
             try {
-                playerModel = new PlayerModel(-1, getIntent().getIntExtra("score", 0));
+                playerModel = new PlayerModel(-1, score, username);
             } catch (Exception exception) {
-                playerModel = new PlayerModel(-1, 0);
+                playerModel = new PlayerModel(-1, 0, null);
             }
 
             DataBaseHelper dataBaseHelper = new DataBaseHelper(GameOverActivity.this);

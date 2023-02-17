@@ -21,6 +21,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         getSupportActionBar().setTitle("Snake Game - Register");
 
+        // getting startGameButton and usernameEditText from xml file
         startGameBtn = findViewById(R.id.startGameBtn);
         usernameET = findViewById(R.id.usernameET);
 
@@ -37,4 +38,4 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
     }
-}
+}// onCreate

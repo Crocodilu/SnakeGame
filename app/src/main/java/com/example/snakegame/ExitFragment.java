@@ -11,13 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+// displays a button that allows the user to exit the application when the user clicks on the button,
+// the user is returned to the main activity and the app is killed (in MainActivity)
 public class ExitFragment extends Fragment {
 
     Button exitBtn1;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_exit, container, false);
 
@@ -34,5 +35,5 @@ public class ExitFragment extends Fragment {
         });
 
         return view;
-    }
-}
+    }// onCreateView
+}// ExitFragment

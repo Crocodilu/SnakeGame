@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         // hide action bar
         getSupportActionBar().hide();
 
+        // to exit the application from BestPlayerActivity - ExitFragment
         if(getIntent().getBooleanExtra("kill", false)){
             // remove all the activities that share the same affinity
             // in this case i haven’t defined one so it’s the same for all
@@ -152,7 +153,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         // init data for snake / surfaceView
         init();
-    }
+    }// surfaceCreated
 
     @Override
     public void surfaceChanged(@NonNull SurfaceHolder surfaceHolder, int i, int i1, int i2) {
@@ -191,7 +192,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
             // increasing value for next point as snake's tale
             startPositionX = startPositionX - (pointSize * 2);
-        }
+        }// for
 
         // add random point om the screen to be eaten by the snake
         addPoint();
@@ -247,7 +248,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
                     // add another random point on the screen
                     addPoint();
-                }
+                }// if
 
                 // check of witch side snake is moving
                 switch (movingPosition){
@@ -286,7 +287,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                         snakePointsList.get(0).setPositionY(headPositionY + (pointSize * 2));
 
                         break;
-                }
+                }// switch
 
                 // check if game is over; game over when snake touches edges or his tail
                 if(checkGameOver(headPositionX, headPositionY)){
@@ -295,6 +296,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                     timer.purge();
                     timer.cancel();
 
+                    // send score and username to GameOverActivity
+                    // data is saved in database only if player goes to GameOverActivity (click on See info)
                     Intent gameOver = new Intent(MainActivity.this, GameOverActivity.class);
                     gameOver.putExtra("score", score);
                     gameOver.putExtra("username", getIntent().getStringExtra("username"));
@@ -330,7 +333,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                             builder.show();
                         }
                     });
-                }
+                }// if
 
                 else{
 
@@ -428,4 +431,4 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         return pointColor;
     }// createPointColor
-}
+}// MainActivity class

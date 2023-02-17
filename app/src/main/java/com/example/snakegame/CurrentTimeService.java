@@ -9,6 +9,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+// provides a simple functionality of getting the current system time
+// and making it available to the client that binds to it
 public class CurrentTimeService extends Service {
     public CurrentTimeService() {
     }
@@ -31,6 +33,7 @@ public class CurrentTimeService extends Service {
         }
     }
 
+    // returns the current system time in a String format using the SimpleDateFormat class
     public String getSystemTime(){
         java.text.SimpleDateFormat systemTime = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
         return systemTime.format(new Date());

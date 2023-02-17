@@ -17,7 +17,7 @@ public class SplashScreen extends AppCompatActivity {
         getSupportActionBar().hide();
 
         // creates a new instance of the Handler class and then uses the postDelayed method
-        // to schedule the execution of a Runnable after a delay of 2500 milliseconds (2.5 seconds)
+        // to schedule the execution of a Runnable after a delay of 1500 milliseconds (1.5 seconds)
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -29,4 +29,4 @@ public class SplashScreen extends AppCompatActivity {
         }, 1500);
 
     }
-}
+}// onCreate

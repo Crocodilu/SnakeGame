@@ -41,6 +41,8 @@ public class BestPlayerActivity extends AppCompatActivity {
     CurrentTimeService currentTimeService = new CurrentTimeService();
     boolean isConnected = false;
     ServiceConnection serviceConnection = new ServiceConnection() {
+
+        // used to bind to CurrentTimeService and retrieve its instance to access its public methods
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
             CurrentTimeService.MyBinder myBinder = (CurrentTimeService.MyBinder) iBinder;
@@ -67,7 +69,7 @@ public class BestPlayerActivity extends AppCompatActivity {
         timeTV = findViewById(R.id.timeTV);
         dateTV = findViewById(R.id.dateTV);
 
-
+        // update and display list content - in this case, only one element - best player
         dataBaseHelper = new DataBaseHelper(BestPlayerActivity.this);
         playerArrayAdapter = new ArrayAdapter<PlayerModel>(BestPlayerActivity.this, android.R.layout.simple_list_item_1, dataBaseHelper.getBest());
         bestListView.setAdapter(playerArrayAdapter);
@@ -77,16 +79,27 @@ public class BestPlayerActivity extends AppCompatActivity {
         trophyBtn = findViewById(R.id.trophyBtn);
         exitBtn = findViewById(R.id.exitBtn);
 
+        // used to manage the fragments in an activity
+        // used to add, remove, replace, or show/hide fragments in the activity
+        // manages the back stack of fragments, so that the user can navigate back to the previous fragment by pressing the back button
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         gitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                fragmentManager.beginTransaction()
+                // perform a transaction that replaces the current fragment with a new instance (of GitFragment in this case)
+                fragmentManager
+                        // starts a new fragment transaction
+                        .beginTransaction()
+                        // replaces the current fragment in the container view (with an instance of GitFragment class)
                         .replace(R.id.fragmentContainerView, GitFragment.class, null)
+                        // transaction can be optimized to reduce the number of changes needed to perform the transaction
                         .setReorderingAllowed(true)
+                        // adds the transaction to the back stack, so that the user can navigate back to the previous fragment
+                        // by pressing the back button
                         .addToBackStack("") // name can be null
+                        // commits the transaction to the FragmentManager, which applies the changes to the UI
                         .commit();
             }
         });
@@ -119,12 +132,12 @@ public class BestPlayerActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "Press image for action",Toast.LENGTH_LONG).show();
 
 
-        //Service pentru ora
+        // we use a service to display the exact time of the device
         Intent intent = new Intent(this, CurrentTimeService.class);
         bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
         timeTV.setText("System time: " + currentTimeService.getSystemTime());
 
-        //Conectare la server pentru data
+        // connect to the nist server to display the exact date
         BestPlayerActivity.NistTimeClient runnable = new BestPlayerActivity.NistTimeClient();
         new Thread(runnable).start();
 
@@ -144,6 +157,8 @@ public class BestPlayerActivity extends AppCompatActivity {
     }// onCreate
 
 
+    // class retrieves the current date and time from the National Institute of Standards and
+    // Technology (NIST) time server using the Network Time Protocol (NTP)
     class NistTimeClient implements Runnable{
 
         public NistTimeClient() {}
@@ -151,14 +166,21 @@ public class BestPlayerActivity extends AppCompatActivity {
         @Override
         public void run() {
             try {
+                // connect to the NIST time server using its IP address and port number
                 Socket socket = new Socket("time.nist.gov", 13);
+                // read the response from the NIST server
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                // read the first line from the server response to discard it
                 bufferedReader.readLine();
+                // read the second line, which contains the current date and time in the format YY-MM-DD hh:mm:ss
+                // we only take the date from this line with substring() method
                 String currentTime = bufferedReader.readLine().substring(6, 14);
                 socket.close();
 
+                // update the UI
                 runOnUiThread(new Runnable() {
                     @Override
+                    // setting the text of dateTextView
                     public void run() {
                         dateTV.setText("NIST server date: 20" + currentTime);
                     }
@@ -169,4 +191,4 @@ public class BestPlayerActivity extends AppCompatActivity {
             }
         }
     }//NistTimeClient
-}
+}// BestPlayerActivity class

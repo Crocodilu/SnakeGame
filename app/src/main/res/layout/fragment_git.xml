@@ -12,7 +12,7 @@
         android:id="@+id/gitIV"
         android:layout_width="wrap_content"
         android:layout_height="250dp"
-        android:background="#9E41455A"
+        android:background="#4D41455A"
         android:src="@drawable/githublogo" />
 
 </FrameLayout>
